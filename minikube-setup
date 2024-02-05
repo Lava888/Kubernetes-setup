@@ -1,0 +1,61 @@
+# Minikube System Requirements
+  2 GB RAM or more
+  2 CPU / vCPU or more
+  20 GB free hard disk space or more
+  Docker / Virtual Machine Manager – KVM & VirtualBox
+
+# Pre requisites for minikube
+  Pre-Installed Ubuntu 22.04 / 20.04
+  Sudo User with admin privileges
+  Stable Internet Connection
+  
+1) Apply All updates for existing packages
+  $ sudo apt update -y
+  $ sudo apt upgrade -y
+  $ sudo reboot (Optional)
+2) Install Minikube dependencies
+  $ sudo apt install -y curl wget apt-transport-https
+3) Download & Install minikube binary
+  $ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+  $ sudo install minikube-linux-amd64 /usr/local/bin/minikube
+4) Verify the minikube version
+  $ minikube version
+5) Install kubectl utility
+  $ curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+  $ chmod +x kubectl
+  $ sudo mv kubectl /usr/local/bin/
+6) start the minikube
+  $ minikube start --driver=docker
+  If you want the custom settings
+  $ minikube start --addons=ingress --cpus=2 --cni=flannel --install-addons=true --kubernetes-version=stable --memory=6g
+7) Verify the minikube
+  $ minikube status
+
+# Managing add-ons on minikube
+  $ minikube addons list
+If you want to wish to enable any addons run the below minikube command,
+  $ minikube addons enable <addon-name>
+
+If you want the enable the minikube dashboard
+  $ minikube dashboard
+
+To stop the minikube
+  $ minikube stop
+To delete the minikube
+  $ minikube delete
+
+To change the minikube confguration settings
+  $ minikube config set cpus 4
+  $ minikube config set memory 8192
+  $ minikube delete
+  $ minikube start
+
+To view the docker config on minikube
+  $ minikube docker-env
+
+NOTE: Before deploying anything on the minikube, Make sure to execute the below command
+  $ eval $(minikube docker-env)
+To loginto minikube VM
+  $ minikube ssh
+To list the images on the minikube
+  $ docker images
